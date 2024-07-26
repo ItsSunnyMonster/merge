@@ -72,6 +72,7 @@ jobs:
           key: rust-test-${{ hashFiles('**/Cargo.toml') }}
           restore-keys: rust-
       - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/checkout@v4
       - name: Run Test
         run: cargo test -- --ignored
 
@@ -91,6 +92,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: clippy
+      - uses: actions/checkout@v4
       - name: Run Clippy
         run: cargo clippy -- -D warnings
 
