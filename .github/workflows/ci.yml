@@ -1,0 +1,155 @@
+name: CI
+
+on: [push, pull_request]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install NodeJS
+        uses: actions/setup-node@v4
+        with:
+          cache: 'npm'
+      - name: Install commitlint
+        run: |
+          npm install conventional-changelog-conventionalcommits
+          npm install commitlint@latest
+      - name: Versions
+        run: |
+          git --version
+          node --version
+          npm --version
+          npx commitlint --version
+
+      - name: Validate current commit (last commit) with commitlint
+        if: github.event_name == 'push'
+        run: npx commitlint --from HEAD~1 --to HEAD --verbose
+
+      - name: Validate PR commits with commitlint
+        if: github.event_name == 'pull_request'
+        run: npx commitlint --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} --to ${{ github.event.pull_request.head.sha }} --verbose
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: rust-build-${{ hashFiles('**/Cargo.toml') }}
+          restore-keys: rust-
+      - uses: dtolnay/rust-toolchain@master
+      - uses: actions/checkout@v4
+      - name: Run Build
+        run: |
+          cargo build --release --no-default-features
+          cargo build --release --no-default-features --features derive
+          cargo build --release --no-default-features --features num
+          cargo build --release --no-default-features --features std
+          cargo build --release
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: rust-test-${{ hashFiles('**/Cargo.toml') }}
+          restore-keys: rust-
+      - uses: dtolnay/rust-toolchain@master
+      - name: Run Test
+        run: cargo test -- --ignored
+
+  clippy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: rust-test-${{ hashFiles('**/Cargo.toml') }}
+          restore-keys: rust-
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          components: clippy
+      - name: Run Clippy
+        run: cargo clippy -- -D warnings
+
+  format:
+    permissions:
+      contents: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-rust-format-${{ hashFiles('**/Cargo.toml') }}
+          restore-keys: ${{ runner.os }}-rust-
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          components: rustfmt
+      - run: echo "${HOME}/.cargo/bin" >> $GITHUB_PATH
+      - name: Rust format on commit
+        if: github.event_name == 'push'
+        uses: mbrobbel/rustfmt-check@master
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: |
+            style: auto format
+            
+            Automated commit from Github Actions
+      - name: Rust format on pull request
+        if: github.event_name == 'pull_request'
+        uses: mbrobbel/rustfmt-check@master
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          mode: review
+
+  msrv:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-rust-msrv-${{ hashFiles('**/Cargo.toml') }}
+          restore-keys: ${{ runner.os }}-rust-
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+      - name: Install cargo-msrv
+        run: cargo install cargo-msrv
+      - name: Check msrv
+        run: cargo msrv verify
+      - name: New msrv
+        if: failure()
+        run: cargo msrv

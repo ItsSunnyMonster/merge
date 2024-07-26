@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2020 Robin Krahl <robin.krahl@ireas.org>
-// SPDX-License-Identifier: Apache-2.0 or MIT
-
 //! A derive macro for the [`merge::Merge`][] trait.
 //!
 //! See the documentation for the [`merge`][] crate for more information.
