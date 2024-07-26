@@ -48,7 +48,7 @@ jobs:
             target/
           key: rust-build-${{ hashFiles('**/Cargo.toml') }}
           restore-keys: rust-
-      - uses: dtolnay/rust-toolchain@master
+      - uses: dtolnay/rust-toolchain@stable
       - uses: actions/checkout@v4
       - name: Run Build
         run: |
@@ -71,7 +71,7 @@ jobs:
             target/
           key: rust-test-${{ hashFiles('**/Cargo.toml') }}
           restore-keys: rust-
-      - uses: dtolnay/rust-toolchain@master
+      - uses: dtolnay/rust-toolchain@stable
       - name: Run Test
         run: cargo test -- --ignored
 
@@ -88,7 +88,7 @@ jobs:
             target/
           key: rust-test-${{ hashFiles('**/Cargo.toml') }}
           restore-keys: rust-
-      - uses: dtolnay/rust-toolchain@master
+      - uses: dtolnay/rust-toolchain@stable
         with:
           components: clippy
       - name: Run Clippy
@@ -111,7 +111,7 @@ jobs:
           key: ${{ runner.os }}-rust-format-${{ hashFiles('**/Cargo.toml') }}
           restore-keys: ${{ runner.os }}-rust-
       - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@master
+      - uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt
       - run: echo "${HOME}/.cargo/bin" >> $GITHUB_PATH
@@ -145,7 +145,7 @@ jobs:
           key: ${{ runner.os }}-rust-msrv-${{ hashFiles('**/Cargo.toml') }}
           restore-keys: ${{ runner.os }}-rust-
       - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@master
+      - uses: dtolnay/rust-toolchain@stable
       - name: Install cargo-msrv
         run: cargo install cargo-msrv
       - name: Check msrv
