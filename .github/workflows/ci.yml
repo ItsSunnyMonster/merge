@@ -168,7 +168,7 @@ jobs:
           apps: |
             {
               "docs": {
-                "build": "cargo docs --no-deps",
+                "build": "cargo doc --no-deps",
                 "dist": "target/doc/merge"
               }
             }
