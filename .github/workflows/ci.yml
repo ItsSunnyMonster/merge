@@ -155,3 +155,19 @@ jobs:
       - name: New msrv
         if: failure()
         run: cargo msrv
+
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build and deploy docs
+        uses: sauloxd/review-apps@latest
+        with:
+          branch: "gh-pages"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          apps: |
+            {
+              "docs"ː {
+                "build": "cargo docs --no-deps",
+                "dist": "target/doc/merge"
+              }
+            }
