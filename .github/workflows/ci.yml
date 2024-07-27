@@ -166,7 +166,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           apps: |
             {
-              "docs"ː {
+              "docs": {
                 "build": "cargo docs --no-deps",
                 "dist": "target/doc/merge"
               }
