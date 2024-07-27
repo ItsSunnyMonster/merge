@@ -148,8 +148,6 @@ jobs:
           restore-keys: ${{ runner.os }}-rust-
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
-      - name: Install cargo-msrv
-        run: cargo install cargo-msrv
       - name: Check msrv
         run: cargo msrv verify
       - name: New msrv
