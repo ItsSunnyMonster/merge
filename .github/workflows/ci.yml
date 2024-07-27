@@ -153,21 +153,3 @@ jobs:
       - name: New msrv
         if: failure()
         run: cargo msrv
-
-  docs:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@stable
-      - name: Build and deploy docs
-        uses: ItsSunnyMonster/review-apps@976fb244159c37fa7f5254380e58b9d2a8b87e56
-        with:
-          branch: "gh-pages"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          apps: |
-            {
-              "docs": {
-                "build": "cargo doc --no-deps",
-                "dist": "target/doc/merge"
-              }
-            }
