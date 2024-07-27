@@ -1,10 +1,10 @@
 [package]
 name = "merge_derive"
 version = "0.1.0"
-authors = ["Robin Krahl <robin.krahl@ireas.org>"]
-edition = "2018"
+authors = ["Robin Krahl <robin.krahl@ireas.org>", "ItsSunnyMonster <contact@sunnymonster.co>"]
+edition = "2021"
 description = "Derive macro for the merge::Merge trait"
-repository = "https://git.sr.ht/~ireas/merge-rs/tree/master/merge_derive"
+repository = "https://github.com/ItsSunnyMonster/merge/tree/master/merge_derive"
 keywords = ["merge", "macros", "derive"]
 categories = ["rust-patterns"]
 readme = "README.md"
