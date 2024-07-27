@@ -1,3 +1,5 @@
+#![deny(missing_docs)]
+
 //! Provides [`Merge`][], a trait for objects that can be merged.
 //!
 //! # Usage
