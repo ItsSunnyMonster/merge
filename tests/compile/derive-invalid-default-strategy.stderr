@@ -1,27 +1,23 @@
-error[E0308]: mismatched types
- --> $DIR/derive-invalid-default-strategy.rs:7:20
+error[E0308]: arguments to this function are incorrect
+ --> tests/compile/derive-invalid-default-strategy.rs:4:20
   |
-7 |   #[merge(strategy = my_custom_merge_strategy)]
-  |  ____________________^
-8 | | struct S {
-9 | |     field1: u16,
-  | |__________^ expected `u8`, found `u16`
+4 |   #[merge(strategy = my_custom_merge_strategy)]
+  |  ____________________-^^^^^^^^^^^^^^^^^^^^^^^
+5 | | struct S {
+6 | |     field1: u16,
+  | |          -
+  | |          |
+  | |__________expected `&mut u8`, found `&mut u16`
+  |            expected `u8`, found `u16`
   |
   = note: expected mutable reference `&mut u8`
              found mutable reference `&mut u16`
-
-error[E0308]: mismatched types
- --> $DIR/derive-invalid-default-strategy.rs:7:20
+note: function defined here
+ --> tests/compile/derive-invalid-default-strategy.rs:9:4
   |
-7 |   #[merge(strategy = my_custom_merge_strategy)]
-  |  ____________________^
-8 | | struct S {
-9 | |     field1: u16,
-  | |__________^ expected `u8`, found `u16`
+9 | fn my_custom_merge_strategy(left: &mut u8, right: u8) {
+  |    ^^^^^^^^^^^^^^^^^^^^^^^^ -------------  ---------
+help: you can convert a `u16` to a `u8` and panic if the converted value doesn't fit
   |
-help: you can convert an `u16` to `u8` and panic if the converted value wouldn't fit
-  |
-7 | #[merge(strategy = my_custom_merge_strategy)]
-8 | struct S {
-9 |     field1.try_into().unwrap(): u16,
-  |
+6 |     field1.try_into().unwrap(): u16,
+  |           ++++++++++++++++++++
