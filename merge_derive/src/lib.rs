@@ -40,16 +40,20 @@ fn impl_merge(ast: &syn::DeriveInput) -> TokenStream {
     let name = &ast.ident;
     let default_strategy = FieldAttrs::from(ast.attrs.iter());
 
+    let (impl_generic, type_generic, where_clause) = ast.generics.split_for_impl();
+
     set_dummy(quote! {
-        impl ::merge::Merge for #name {
+        impl #impl_generic ::merge::Merge for #name #type_generic #where_clause {
             fn merge(&mut self, other: Self) {
                 unimplemented!()
             }
         }
     });
 
+    let generics = &ast.generics;
+
     if let syn::Data::Struct(syn::DataStruct { ref fields, .. }) = ast.data {
-        impl_merge_for_struct(name, fields, default_strategy)
+        impl_merge_for_struct(name, fields, generics, default_strategy)
     } else {
         abort_call_site!("merge::Merge can only be derived for structs")
     }
@@ -58,12 +62,15 @@ fn impl_merge(ast: &syn::DeriveInput) -> TokenStream {
 fn impl_merge_for_struct(
     name: &syn::Ident,
     fields: &syn::Fields,
+    generics: &syn::Generics,
     default_strategy: FieldAttrs,
 ) -> TokenStream {
     let assignments = gen_assignments(fields, default_strategy);
 
+    let (impl_generic, type_generic, where_clause) = generics.split_for_impl();
+
     quote! {
-        impl ::merge::Merge for #name {
+        impl #impl_generic ::merge::Merge for #name #type_generic # where_clause {
             fn merge(&mut self, other: Self) {
                 #assignments
             }
