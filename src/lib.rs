@@ -270,7 +270,7 @@ pub mod hashmap {
     ///
     /// In other words, this gives precedence to `right`.
     pub fn overwrite<K: Eq + Hash, V>(left: &mut HashMap<K, V>, right: HashMap<K, V>) {
-        left.extend(right.into_iter())
+        left.extend(right)
     }
 
     /// On conflict, ignore elements from `right`.
