@@ -1,0 +1,54 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Fira Sans",Arial,NanumBarunGothic,sans-serif;
+  font-size:x-large;
+}
+
+.panel-wrapper {
+  padding: 2em;
+  min-height: 20vh;
+  min-width: 40vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  flex-direction: column;
+  border-radius: 1em;
+}
+
+.panel-wrapper div {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+}
+
+.version {
+  min-width: 6em;
+  font-size: medium;
+  outline: none;
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
+}
+
+.version:focus {
+  border-color: var(--link-color);
+}
+
+.go {
+  cursor: pointer;
+  font-size: large;
+  padding: 0.5em 1em;
+  transition: all 200ms cubic-bezier(.8, .01, .11, .98);
+  border-radius: 0.5em;
+}
+
+.go:hover {
+  background-color: var(--link-color);
+  color: var(--bg-color);
+}

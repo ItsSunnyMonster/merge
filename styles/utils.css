@@ -1,0 +1,15 @@
+.bg {
+  background-color: var(--bg-color);
+}
+
+.text {
+  color: var(--text-color);
+}
+
+.link {
+  color: var(--link-color);
+}
+
+.panel {
+  background-color: var(--panel-color);
+}

@@ -1,0 +1,27 @@
+.theme-light {
+  --bg-color: #FFF;
+  --panel-color: #F5F5F5;
+  --text-color: #000;
+  --link-color: #3873AD;
+}
+
+.theme-dark {
+  --bg-color: #353535;
+  --panel-color: #2A2A2A;
+  --text-color: #DDD;
+  --link-color: #D2991D;
+}
+
+.theme-ayu {
+  --bg-color: #0F141A;
+  --panel-color: #191F26;
+  --text-color: #FFF;
+  --link-color: #38AFD7;
+}
+
+.theme-ctp {
+  --bg-color: #1e1e2e;
+  --panel-color: #313244;
+  --text-color: #cdd6f4;
+  --link-color: #74c7ec;
+}
