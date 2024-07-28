@@ -56,6 +56,12 @@ const octokit = new MyOctokit({
       optionGroup.appendChild(option);
     }
   });
+
+  let versionSelector = document.querySelector("#version");
+  let label = document.querySelector("#label");
+
+  versionSelector.removeAttribute("disabled");
+  label.innerText = "Select Version:"
 })();
 
 let button = document.querySelector("#go");
