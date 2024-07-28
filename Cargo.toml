@@ -1,6 +1,6 @@
 [package]
 name = "merge"
-version = "0.2.0-dev"
+version = "0.1.1"
 authors = ["Robin Krahl <robin.krahl@ireas.org>", "ItsSunnyMonster <contact@sunnymonster.co>"]
 edition = "2021"
 description = "Merge multiple values into one"
@@ -15,7 +15,7 @@ readme = "README.md"
 rust-version = "1.60.0"
 
 [dependencies]
-merge_derive = { path = "merge_derive", version = "0.1.0", optional = true }
+merge_derive = { path = "merge_derive", version = "0.1.1", optional = true }
 num-traits = { version = "0.2.12", optional = true }
 
 [dev-dependencies]
