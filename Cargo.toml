@@ -1,6 +1,6 @@
 [package]
 name = "merge"
-version = "0.1.1"
+version = "0.2.0-dev"
 authors = ["Robin Krahl <robin.krahl@ireas.org>", "ItsSunnyMonster <contact@sunnymonster.co>"]
 edition = "2021"
 description = "Merge multiple values into one"
