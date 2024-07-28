@@ -22,11 +22,17 @@ const octokit = new MyOctokit({
         octokit.log.info(`Retrying after ${retryAfter} seconds!`);
         return true;
       }
+
+      let label = document.querySelector("#label");
+      label.innerText = "Failed to load versions.";
     },
     onSecondaryRateLimit: (retryAfter, options, octokit) => {
       octokit.log.warn(
         `SecondaryRateLimit detected for request ${options.method} ${options.url}`
       );
+
+      let label = document.querySelector("#label");
+      label.innerText = "Failed to load versions.";
     },
   },
 });
@@ -57,10 +63,7 @@ const octokit = new MyOctokit({
     }
   });
 
-  let versionSelector = document.querySelector("#version");
   let label = document.querySelector("#label");
-
-  versionSelector.removeAttribute("disabled");
   label.innerText = "Select Version:"
 })();
 
