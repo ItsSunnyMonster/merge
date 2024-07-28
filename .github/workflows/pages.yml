@@ -24,13 +24,10 @@ jobs:
         steps:
             - name: Checkout
               uses: actions/checkout@v4
-            - name: Set up Minify Actions
-              uses: amireshoon/minifyAction@main
+            - name: Minify the files
+              uses: nizarmah/auto-minify@v3
               with:
-                repo: ItsSunnyMonster/merge
-            - name: Minifying Codes
-              run: |
-                minifier.sh ItsSunnyMonster/merge
+                overwrite: true
             - name: Setup Pages
               uses: actions/configure-pages@v5
             - name: Upload Artifact
