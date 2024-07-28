@@ -113,7 +113,7 @@ jobs:
           key: ${{ runner.os }}-rust-format-${{ hashFiles('**/Cargo.toml') }}
           restore-keys: ${{ runner.os }}-rust-
       - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: dtolnay/rust-toolchain@nightly
         with:
           components: rustfmt
       - run: echo "${HOME}/.cargo/bin" >> $GITHUB_PATH
