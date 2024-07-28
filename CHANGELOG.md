@@ -1,4 +1,4 @@
-# Unreleased
+# v0.1.1 (2024-07-28)
 
 - Remove the `Merge` implementation for `Option<T>`.
 - Add new merge strategies:
@@ -7,6 +7,7 @@
   - `hashmap::overwrite`
   - `hashmap::ignore`
   - `hashmap::recurse`
+- Added ability to derive structs with lifetimes and generics.
 
 # v0.1.0 (2020-09-01)
 
