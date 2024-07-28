@@ -52,3 +52,30 @@ body {
   background-color: var(--link-color);
   color: var(--bg-color);
 }
+
+.color-picker {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 2em;
+  display: flex;
+  gap: 0.5em;
+}
+
+.color-picker > svg {
+  width: 2em;
+  height: 2em;
+}
+
+.color-picker > svg .path {
+  stroke: var(--text-color);
+}
+
+.color-picker > select {
+  border: 2px solid rgba(0, 0, 0, 0);
+  outline: none;
+}
+
+.color-picker > select:hover {
+  border: var(--link-color) 2px solid;
+}

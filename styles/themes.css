@@ -25,3 +25,20 @@
   --text-color: #cdd6f4;
   --link-color: #74c7ec;
 }
+
+/* Light */
+.theme-system {
+  --bg-color: #FFF;
+  --panel-color: #F5F5F5;
+  --text-color: #000;
+  --link-color: #3873AD;
+}
+
+@media (prefers-color-scheme: dark) {
+  .theme-system {
+    --bg-color: #353535;
+    --panel-color: #2A2A2A;
+    --text-color: #DDD;
+    --link-color: #D2991D;
+  }
+}

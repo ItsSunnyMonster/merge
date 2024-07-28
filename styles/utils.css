@@ -1,15 +1,19 @@
 .bg {
   background-color: var(--bg-color);
+  transition: background-color 200ms cubic-bezier(.8, .01, .11, .98);
 }
 
 .text {
   color: var(--text-color);
+  transition: color 200ms cubic-bezier(.8, .01, .11, .98);
 }
 
 .link {
   color: var(--link-color);
+  transition: color 200ms cubic-bezier(.8, .01, .11, .98);
 }
 
 .panel {
   background-color: var(--panel-color);
+  transition: background-color 200ms cubic-bezier(.8, .01, .11, .98);
 }
