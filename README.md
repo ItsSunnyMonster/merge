@@ -82,6 +82,15 @@ This crate has the following features:
   modules that require the standard library. If this feature is not set,
   `merge` is a `no_std` library.
 
+## Documentation
+The documentation selector can be found [here](https://itssunnymonster.github.io/merge).
+
+To go to the docs for a specific version, go to <versions-1-2-3--merge-docs.netlify.app>
+
+To go to the docs for the latest release, go to <merge-docs.netlify.app>
+
+To go to the docs for the master branch, go to <master--merge-docs.netlify.app>
+
 ## Minimum Supported Rust Version
 
 This crate supports Rust 1.60.0 or later.
